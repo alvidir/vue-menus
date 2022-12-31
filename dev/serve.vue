@@ -1,19 +1,35 @@
 <template>
   <div id="app">
     <div class="demo-set light">
-      <div class="demo-subset bg-secondary">
-        <!-- DEMO ITEM -->
+      <div
+        class="demo-subset bg-secondary"
+        @mouseup.right="activateContextMenu(1)"
+        @contextmenu.prevent
+      >
+        <context-menu :toggle="contextMenus[1]"></context-menu>
       </div>
-      <div class="demo-subset bg-primary">
-        <!-- DEMO ITEM -->
+      <div
+        class="demo-subset bg-primary"
+        @mouseup.right="activateContextMenu(2)"
+        @contextmenu.prevent
+      >
+        <context-menu :toggle="contextMenus[2]"></context-menu>
       </div>
     </div>
     <div class="demo-set dark">
-      <div class="demo-subset bg-secondary">
-        <!-- DEMO ITEM -->
+      <div
+        class="demo-subset bg-secondary"
+        @mouseup.right="activateContextMenu(3)"
+        @contextmenu.prevent
+      >
+        <context-menu :toggle="contextMenus[3]"></context-menu>
       </div>
-      <div class="demo-subset bg-primary">
-        <!-- DEMO ITEM -->
+      <div
+        class="demo-subset bg-primary"
+        @mouseup.right="activateContextMenu(4)"
+        @contextmenu.prevent
+      >
+        <context-menu :toggle="contextMenus[4]"></context-menu>
       </div>
     </div>
   </div>
@@ -21,14 +37,21 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Option } from "../src/ContextMenu.vue";
 
 export default defineComponent({
   name: "ServeDev",
   data() {
     return {
-      rightClickMenuOptions: [] as Option[],
+      contextMenus: { 1: false, 2: false, 3: false, 4: false } as {
+        [key: number]: boolean;
+      },
     };
+  },
+
+  methods: {
+    activateContextMenu(key: number) {
+      this.contextMenus[key] = !this.contextMenus[key];
+    },
   },
 });
 </script>

@@ -1,36 +1,36 @@
 <template>
-  <regular-card id="right-click-menu" v-if="active">
-    <div v-for="option in options" :key="option.id">{{ option.title }}</div>
+  <regular-card
+    v-if="active"
+    v-click-outside="onClickOutside"
+    class="context-menu"
+  >
+    <slot></slot>
   </regular-card>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
-
-export interface Option {
-  id: string;
-  title: string;
-}
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "ContextMenu",
+
   props: {
-    active: Boolean,
-    options: Object as PropType<Option[]>,
+    toggle: {
+      type: Boolean,
+      required: true,
+    },
   },
 
   watch: {
-    active() {
+    toggle() {
       this.updatePosition();
-    },
-
-    items() {
-      this.updatePosition();
+      this.active = true;
     },
   },
 
   data() {
     return {
+      active: false,
       live: {
         mousePosX: 0,
         mousePosY: 0,
@@ -53,12 +53,16 @@ export default defineComponent({
   },
 
   methods: {
+    onClickOutside() {
+      this.active = false;
+    },
+
     updatePosition() {
       this.current.mousePosX = this.live.mousePosX;
       this.current.mousePosY = this.live.mousePosY;
     },
 
-    onMouseEvent(event: any) {
+    onMouseEvent(event: MouseEvent) {
       this.live.mousePosX = event.pageX;
       this.live.mousePosY = event.pageY;
     },
@@ -78,12 +82,12 @@ export default defineComponent({
 <style scoped lang="scss">
 @import "fibonacci-styles";
 
-#right-click-menu {
+.context-menu {
   @extend .shadow-box;
 
   position: absolute;
   height: fit-content;
-  width: $fib-12 * 1px;
+  min-width: $fib-12 * 1px;
   left: v-bind(left);
   top: v-bind(top);
   z-index: 1;
