@@ -1,4 +1,10 @@
-import { createApp } from "vue";
-import App from "./App.vue";
+import ContextMenu from "./ContextMenu.vue";
 
-createApp(App).mount("#app");
+const CONTEXT_MENU_TAG = "context-menu";
+export default {
+  ContextMenu,
+};
+
+export function include(app: any): any {
+  app.component(CONTEXT_MENU_TAG, ContextMenu);
+}
