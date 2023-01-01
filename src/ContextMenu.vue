@@ -4,7 +4,9 @@
     v-click-outside="onClickOutside"
     class="context-menu"
   >
-    <slot></slot>
+    <div class="options">
+      <slot></slot>
+    </div>
   </regular-card>
 </template>
 
@@ -79,17 +81,52 @@ export default defineComponent({
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss">
 @import "fibonacci-styles";
 
 .context-menu {
   @extend .shadow-box;
 
-  position: absolute;
+  position: absolute !important;
   height: fit-content;
   min-width: $fib-12 * 1px;
   left: v-bind(left);
   top: v-bind(top);
   z-index: 1;
+
+  .card-body {
+    padding: 0px !important;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+
+    span {
+      color: var(--color-text-secondary);
+      font-size: small;
+      font-weight: 800;
+      padding: $fib-6 * 1px;
+
+      &:not(:first-child) {
+        border-top: 1px solid var(--color-border);
+      }
+    }
+
+    button {
+      @extend .round-corners, .fib-4;
+
+      text-align: start;
+      background: transparent;
+      border: none;
+      margin: $fib-3 * 1px;
+      padding: $fib-6 * 1px;
+      color: var(--color-text-primary);
+
+      &:hover {
+        background: var(--color-button-hover);
+      }
+    }
+  }
 }
 </style>

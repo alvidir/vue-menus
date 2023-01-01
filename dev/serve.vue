@@ -6,14 +6,23 @@
         @mouseup.right="activateContextMenu(1)"
         @contextmenu.prevent
       >
-        <context-menu :toggle="contextMenus[1]"></context-menu>
+        <context-menu :toggle="contextMenus[1]">
+          <span>first section</span>
+          <button>an option</button>
+          <button>another option</button>
+          <span>second section</span>
+          <button>an option</button>
+        </context-menu>
       </div>
       <div
         class="demo-subset bg-primary"
         @mouseup.right="activateContextMenu(2)"
         @contextmenu.prevent
       >
-        <context-menu :toggle="contextMenus[2]"></context-menu>
+        <context-menu :toggle="contextMenus[2]">
+          <button>an option</button>
+          <button>another option</button>
+        </context-menu>
       </div>
     </div>
     <div class="demo-set dark">
@@ -22,14 +31,23 @@
         @mouseup.right="activateContextMenu(3)"
         @contextmenu.prevent
       >
-        <context-menu :toggle="contextMenus[3]"></context-menu>
+        <context-menu :toggle="contextMenus[3]">
+          <span>first section</span>
+          <button>an option</button>
+          <button>another option</button>
+          <span>second section</span>
+          <button>an option</button>
+        </context-menu>
       </div>
       <div
         class="demo-subset bg-primary"
         @mouseup.right="activateContextMenu(4)"
         @contextmenu.prevent
       >
-        <context-menu :toggle="contextMenus[4]"></context-menu>
+        <context-menu :toggle="contextMenus[4]">
+          <button>an option</button>
+          <button>another option</button>
+        </context-menu>
       </div>
     </div>
   </div>
