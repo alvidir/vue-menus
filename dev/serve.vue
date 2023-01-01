@@ -7,11 +7,11 @@
         @contextmenu.prevent
       >
         <context-menu :toggle="contextMenus[1]">
-          <span>first section</span>
-          <button>an option</button>
-          <button>another option</button>
-          <span>second section</span>
-          <button>an option</button>
+          <span>First section</span>
+          <button>An option</button>
+          <button>Another option</button>
+          <span class="danger">Danger zone</span>
+          <button class="danger">An option</button>
         </context-menu>
       </div>
       <div
@@ -20,8 +20,8 @@
         @contextmenu.prevent
       >
         <context-menu :toggle="contextMenus[2]">
-          <button>an option</button>
-          <button>another option</button>
+          <button>An option</button>
+          <button>Another option</button>
         </context-menu>
       </div>
     </div>
@@ -32,11 +32,11 @@
         @contextmenu.prevent
       >
         <context-menu :toggle="contextMenus[3]">
-          <span>first section</span>
-          <button>an option</button>
-          <button>another option</button>
-          <span>second section</span>
-          <button>an option</button>
+          <span>First section</span>
+          <button>An option</button>
+          <button>Another option</button>
+          <span class="danger">Danger zone</span>
+          <button class="danger">An option</button>
         </context-menu>
       </div>
       <div
@@ -45,8 +45,8 @@
         @contextmenu.prevent
       >
         <context-menu :toggle="contextMenus[4]">
-          <button>an option</button>
-          <button>another option</button>
+          <button>An option</button>
+          <button>Another option</button>
         </context-menu>
       </div>
     </div>

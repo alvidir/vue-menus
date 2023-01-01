@@ -102,6 +102,10 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
 
+    .danger {
+      color: var(--color-red);
+    }
+
     span {
       color: var(--color-text-secondary);
       font-size: small;
@@ -110,6 +114,10 @@ export default defineComponent({
 
       &:not(:first-child) {
         border-top: 1px solid var(--color-border);
+
+        &.danger {
+          border-color: var(--color-red);
+        }
       }
     }
 
@@ -117,14 +125,19 @@ export default defineComponent({
       @extend .round-corners, .fib-4;
 
       text-align: start;
+      box-sizing: border-box !important;
       background: transparent;
       border: none;
       margin: $fib-3 * 1px;
       padding: $fib-6 * 1px;
       color: var(--color-text-primary);
 
-      &:hover {
+      &:not(.danger):hover {
         background: var(--color-button-hover);
+      }
+
+      &.danger:hover {
+        outline: 1px solid var(--color-red);
       }
     }
   }
