@@ -1,8 +1,8 @@
 import { createApp } from "vue";
 import Dev from "./serve.vue";
-import { include } from "../src/main";
+import MenuComponents from "../src/main";
 
 const app = createApp(Dev);
-include(app);
+MenuComponents(app);
 
 app.mount("#app");
