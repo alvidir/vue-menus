@@ -1,17 +1,27 @@
 <template>
-  <div v-if="active" v-click-outside="onClickOutside" class="menu context">
+  <regular-menu
+    class="context-menu"
+    :active="active"
+    v-click-outside="onClickOutside"
+  >
     <div class="options">
       <slot></slot>
     </div>
-  </div>
+  </regular-menu>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import RegularMenu from "./RegularMenu.vue";
+
+export const CLOSE_EVENT_NAME = "close";
 
 export default defineComponent({
   name: "ContextMenu",
-
+  events: [CLOSE_EVENT_NAME],
+  components: {
+    RegularMenu,
+  },
   props: {
     toggle: {
       type: Boolean,
@@ -22,7 +32,7 @@ export default defineComponent({
   watch: {
     toggle() {
       this.updatePosition();
-      this.active = true;
+      this.active = !this.active;
     },
   },
 
@@ -53,6 +63,7 @@ export default defineComponent({
   methods: {
     onClickOutside() {
       this.active = false;
+      this.$emit(CLOSE_EVENT_NAME);
     },
 
     updatePosition() {
@@ -78,67 +89,9 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-@import "./styles.scss";
-
-.menu.context {
-  @extend .shadow-box;
-
+.context-menu {
   position: absolute !important;
   left: v-bind(left);
   top: v-bind(top);
-
-  .card-body {
-    padding: 0px !important;
-  }
-
-  .options {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-
-    &:not(:first-child) {
-      border-top: 1px solid var(--color-border) !important;
-    }
-
-    &.danger {
-      border-color: var(--color-red) !important;
-    }
-
-    .danger {
-      color: var(--color-red);
-    }
-
-    span {
-      color: var(--color-text-secondary);
-      font-size: small;
-      font-weight: 800;
-      padding: $fib-6 * 1px;
-
-      &:not(:first-child) {
-        border-top: 1px solid var(--color-border);
-
-        &.danger {
-          border-color: var(--color-red);
-        }
-      }
-    }
-
-    button {
-      @extend .round-corners, .fib-4;
-
-      text-align: start;
-      box-sizing: border-box !important;
-      background: transparent;
-      border: none;
-      margin: $fib-3 * 1px;
-      padding: $fib-6 * 1px;
-      color: var(--color-text-primary);
-
-      &:hover {
-        background: var(--color-button-hover);
-      }
-    }
-  }
 }
 </style>

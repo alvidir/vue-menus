@@ -1,4 +1,8 @@
 <template>
+  <link
+    href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+    rel="stylesheet"
+  />
   <div id="app">
     <div class="demo-set light">
       <div
@@ -11,7 +15,9 @@
           <button>An option</button>
           <button>Another option</button>
           <span class="danger">Danger zone</span>
-          <button class="danger">An option</button>
+          <button class="danger">
+            <i class="bx bxs-message-alt-error"></i>An option
+          </button>
         </context-menu>
       </div>
       <div
@@ -36,7 +42,9 @@
           <button>An option</button>
           <button>Another option</button>
           <span class="danger">Danger zone</span>
-          <button class="danger">An option</button>
+          <button class="danger">
+            <i class="bx bxs-message-alt-error"></i>An option
+          </button>
         </context-menu>
       </div>
       <div
