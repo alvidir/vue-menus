@@ -1,13 +1,9 @@
 <template>
-  <regular-card
-    v-if="active"
-    v-click-outside="onClickOutside"
-    class="context-menu"
-  >
+  <div v-if="active" v-click-outside="onClickOutside" class="menu context">
     <div class="options">
       <slot></slot>
     </div>
-  </regular-card>
+  </div>
 </template>
 
 <script lang="ts">
@@ -82,17 +78,14 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-@import "fibonacci-styles";
+@import "./styles.scss";
 
-.context-menu {
+.menu.context {
   @extend .shadow-box;
 
   position: absolute !important;
-  height: fit-content;
-  min-width: $fib-12 * 1px;
   left: v-bind(left);
   top: v-bind(top);
-  z-index: 1;
 
   .card-body {
     padding: 0px !important;
@@ -101,6 +94,16 @@ export default defineComponent({
   .options {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    width: 100%;
+
+    &:not(:first-child) {
+      border-top: 1px solid var(--color-border) !important;
+    }
+
+    &.danger {
+      border-color: var(--color-red) !important;
+    }
 
     .danger {
       color: var(--color-red);
@@ -132,12 +135,8 @@ export default defineComponent({
       padding: $fib-6 * 1px;
       color: var(--color-text-primary);
 
-      &:not(.danger):hover {
+      &:hover {
         background: var(--color-button-hover);
-      }
-
-      &.danger:hover {
-        outline: 1px solid var(--color-red);
       }
     }
   }
