@@ -1,9 +1,5 @@
 <template>
-  <regular-menu
-    class="context-menu"
-    :active="active"
-    v-click-outside="onClickOutside"
-  >
+  <regular-menu class="context-menu" :active="active" @close="onClose">
     <div class="options">
       <slot></slot>
     </div>
@@ -13,6 +9,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import RegularMenu from "./RegularMenu.vue";
+import { ClickOutside } from "vue-directives/src/main";
 
 export const CLOSE_EVENT_NAME = "close";
 
@@ -22,23 +19,19 @@ export default defineComponent({
   components: {
     RegularMenu,
   },
+  directives: { ClickOutside },
   props: {
-    toggle: {
-      type: Boolean,
-      required: true,
-    },
+    active: Boolean,
   },
 
   watch: {
-    toggle() {
-      this.updatePosition();
-      this.active = !this.active;
+    active() {
+      if (this.active) this.updatePosition();
     },
   },
 
   data() {
     return {
-      active: false,
       live: {
         mousePosX: 0,
         mousePosY: 0,
@@ -61,8 +54,7 @@ export default defineComponent({
   },
 
   methods: {
-    onClickOutside() {
-      this.active = false;
+    onClose() {
       this.$emit(CLOSE_EVENT_NAME);
     },
 

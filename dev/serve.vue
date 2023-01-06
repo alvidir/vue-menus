@@ -10,7 +10,7 @@
         @mouseup.right="activateContextMenu(1)"
         @contextmenu.prevent
       >
-        <context-menu :toggle="contextMenus[1]">
+        <context-menu :active="contextMenus[1]" @close="hideContextMenu(1)">
           <span>First section</span>
           <button>An option</button>
           <button>Another option</button>
@@ -25,7 +25,7 @@
         @mouseup.right="activateContextMenu(2)"
         @contextmenu.prevent
       >
-        <context-menu :toggle="contextMenus[2]">
+        <context-menu :active="contextMenus[2]" @close="hideContextMenu(2)">
           <button>An option</button>
           <button>Another option</button>
         </context-menu>
@@ -37,7 +37,7 @@
         @mouseup.right="activateContextMenu(3)"
         @contextmenu.prevent
       >
-        <context-menu :toggle="contextMenus[3]">
+        <context-menu :active="contextMenus[3]" @close="hideContextMenu(3)">
           <span>First section</span>
           <button>An option</button>
           <button>Another option</button>
@@ -52,7 +52,7 @@
         @mouseup.right="activateContextMenu(4)"
         @contextmenu.prevent
       >
-        <context-menu :toggle="contextMenus[4]">
+        <context-menu :active="contextMenus[4]" @close="hideContextMenu(4)">
           <button>An option</button>
           <button>Another option</button>
         </context-menu>
@@ -76,7 +76,11 @@ export default defineComponent({
 
   methods: {
     activateContextMenu(key: number) {
-      this.contextMenus[key] = !this.contextMenus[key];
+      this.contextMenus[key] = true;
+    },
+
+    hideContextMenu(key: number) {
+      this.contextMenus[key] = false;
     },
   },
 });
