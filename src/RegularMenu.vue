@@ -32,7 +32,7 @@ export default defineComponent({
 @import "fibonacci-styles";
 
 .regular-menu {
-  @extend .shadow-box, .round-corners;
+  @extend .round-corners;
 
   height: fit-content;
   min-width: $fib-12 * 1px;
@@ -59,7 +59,10 @@ export default defineComponent({
       color: var(--color-text-secondary);
       font-size: small;
       font-weight: 800;
-      padding: $fib-6 * 1px;
+
+      &:not(:empty) {
+        padding: $fib-6 * 1px;
+      }
 
       &:not(:first-child) {
         border-top: 1px solid var(--color-border);

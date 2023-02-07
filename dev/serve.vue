@@ -5,6 +5,24 @@
   />
   <div id="app">
     <div class="demo-set light">
+      <dock-menu position="horizontal">
+        <button>
+          <label>I am a tooltip</label>
+          hello world
+        </button>
+        <button>hello world</button>
+        <span></span>
+        <button>hello world</button>
+      </dock-menu>
+      <dock-menu>
+        <button>
+          <label>I am a tooltip</label>
+          hello world
+        </button>
+        <button>hello world</button>
+        <span></span>
+        <button>hello world</button>
+      </dock-menu>
       <div
         class="demo-subset bg-secondary"
         @mouseup.right="activateContextMenu(1)"
@@ -32,6 +50,12 @@
       </div>
     </div>
     <div class="demo-set dark">
+      <dock-menu
+        ><button>hello world</button>
+        <button>hello world</button>
+        <span></span>
+        <button>hello world</button>
+      </dock-menu>
       <div
         class="demo-subset bg-secondary"
         @mouseup.right="activateContextMenu(3)"
