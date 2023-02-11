@@ -3,26 +3,15 @@
     href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
     rel="stylesheet"
   />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
   <div id="app">
     <div class="demo-set light">
-      <dock-menu position="horizontal">
-        <button>
-          <label>I am a tooltip</label>
-          hello world
-        </button>
-        <button>hello world</button>
-        <span></span>
-        <button>hello world</button>
-      </dock-menu>
-      <dock-menu>
-        <button>
-          <label>I am a tooltip</label>
-          hello world
-        </button>
-        <button>hello world</button>
-        <span></span>
-        <button>hello world</button>
-      </dock-menu>
+      <demo-sidenav></demo-sidenav>
       <div
         class="demo-subset bg-secondary"
         @mouseup.right="activateContextMenu(1)"
@@ -50,12 +39,7 @@
       </div>
     </div>
     <div class="demo-set dark">
-      <dock-menu
-        ><button>hello world</button>
-        <button>hello world</button>
-        <span></span>
-        <button>hello world</button>
-      </dock-menu>
+      <demo-sidenav></demo-sidenav>
       <div
         class="demo-subset bg-secondary"
         @mouseup.right="activateContextMenu(3)"
@@ -87,11 +71,15 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import DemoSidenav from "./DemoSidenav.vue";
 
 export default defineComponent({
   name: "ServeDev",
+  components: { DemoSidenav },
   data() {
     return {
+      expanded: false,
+      flex: false,
       contextMenus: { 1: false, 2: false, 3: false, 4: false } as {
         [key: number]: boolean;
       },
@@ -105,6 +93,10 @@ export default defineComponent({
 
     hideContextMenu(key: number) {
       this.contextMenus[key] = false;
+    },
+
+    switchExpanded() {
+      this.expanded = !this.expanded;
     },
   },
 });
@@ -171,5 +163,9 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+h2 {
+  padding-left: $fib-4 * 1px;
 }
 </style>

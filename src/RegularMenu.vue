@@ -86,7 +86,7 @@ export default defineComponent({
       padding: $fib-6 * 1px;
       color: var(--color-text-primary);
 
-      &:hover {
+      &:not(.no-hover):hover {
         background: var(--color-button-hover);
       }
 
