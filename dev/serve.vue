@@ -10,7 +10,7 @@
     rel="stylesheet"
   />
   <div id="app">
-    <div class="demo-set light">
+    <div class="demo-set theme-light">
       <demo-sidenav></demo-sidenav>
       <div
         class="demo-subset bg-secondary"
@@ -38,7 +38,7 @@
         </context-menu>
       </div>
     </div>
-    <div class="demo-set dark">
+    <div class="demo-set theme-dark">
       <demo-sidenav></demo-sidenav>
       <div
         class="demo-subset bg-secondary"
@@ -163,9 +163,5 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-h2 {
-  padding-left: $fib-4 * 1px;
 }
 </style>

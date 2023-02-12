@@ -55,7 +55,7 @@ export default defineComponent({
       color: var(--color-red);
     }
 
-    span {
+    & > span {
       color: var(--color-text-secondary);
       font-size: small;
       font-weight: 800;
@@ -73,7 +73,7 @@ export default defineComponent({
       }
     }
 
-    button {
+    & > button {
       @extend .round-corners, .fib-4;
 
       display: flex;
@@ -90,7 +90,13 @@ export default defineComponent({
         background: var(--color-button-hover);
       }
 
-      i {
+      & > span {
+        color: var(--color-text-secondary);
+        font-size: small;
+        font-weight: 800;
+      }
+
+      & > i {
         font-size: large;
 
         &:first-child {

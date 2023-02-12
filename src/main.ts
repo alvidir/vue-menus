@@ -1,17 +1,17 @@
 import { App } from "vue";
 import RegularMenu from "./RegularMenu.vue";
 import ContextMenu from "./ContextMenu.vue";
-import SidenavMenu from "./SidenavMenu.vue";
+import DockMenu from "./DockMenu.vue";
 
 const REGULAR_MENU_TAG = "regular-menu";
 const CONTEXT_MENU_TAG = "context-menu";
-const SIDENAV_MENU_TAG = "sidenav-menu";
+const DOCK_MENU_TAG = "dock-menu";
 
 function include(app: App): App {
   return app
     .component(REGULAR_MENU_TAG, RegularMenu)
     .component(CONTEXT_MENU_TAG, ContextMenu)
-    .component(SIDENAV_MENU_TAG, SidenavMenu);
+    .component(DOCK_MENU_TAG, DockMenu);
 }
 
 export default include;

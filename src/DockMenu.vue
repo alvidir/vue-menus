@@ -1,6 +1,6 @@
 <template>
-  <div class="sidenav-menu">
-    <regular-menu :active="active" :class="{ flex: flex, expanded: expanded }">
+  <div class="dock-menu">
+    <regular-menu :active="active" :class="{ flex: flex }">
       <slot></slot>
     </regular-menu>
   </div>
@@ -11,7 +11,7 @@ import { defineComponent, PropType } from "vue";
 import RegularMenu from "./RegularMenu.vue";
 
 export default defineComponent({
-  name: "SidenavMenu",
+  name: "DockMenu",
   components: {
     RegularMenu,
   },
@@ -19,10 +19,6 @@ export default defineComponent({
     active: {
       type: Boolean,
       default: true,
-    },
-    expanded: {
-      type: Boolean,
-      default: false,
     },
     flex: {
       type: Boolean,
@@ -42,7 +38,7 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-.sidenav-menu {
+.dock-menu {
   @import "fibonacci-styles";
 
   position: absolute;
@@ -56,7 +52,7 @@ export default defineComponent({
   padding-top: $fib-4 * 1px;
   padding-bottom: $fib-4 * 1px;
 
-  .regular-menu {
+  & > .regular-menu {
     @extend .round-corners, .fib-6;
 
     min-width: fit-content;
@@ -66,96 +62,94 @@ export default defineComponent({
       height: 100%;
     }
 
-    &.expanded {
-      width: $fib-12 * 1px;
-
-      .options {
-        width: 100% !important;
-
-        button {
-          width: $fib-12 * 1px - $fib-5 * 1px !important;
-        }
-
-        label {
-          visibility: hidden !important;
-        }
-      }
-    }
-
-    .options {
+    & > .options {
       width: fit-content;
       height: 100%;
-      overflow: hidden;
 
-      button {
+      & > span.dock {
+        height: 100%;
+        border: none;
+      }
+
+      & > button {
         @extend .round-corners, .fib-5;
 
+        position: relative;
         height: $fib-9 * 1px;
         min-height: $fib-9 * 1px;
         width: $fib-9 * 1px;
         white-space: nowrap;
 
+        .absolute {
+          position: absolute;
+          margin-left: $fib-5 * 1px;
+          left: 100%;
+        }
+
+        .bottom {
+          @extend .absolute;
+          bottom: 0px !important;
+        }
+
+        .top {
+          @extend .absolute;
+          top: 0px !important;
+        }
+
+        & > label,
+        & > .tooltip {
+          @extend .shadow-box;
+          @extend .absolute;
+
+          white-space: nowrap;
+          border-radius: $fib-5 * 1px;
+          border: 1px solid var(--color-border);
+          padding: $fib-5 * 1px $fib-6 * 1px;
+        }
+
         &.active {
-          //   background: #323232;
+          background: var(--color-button-active);
+          & > i {
+            color: var(--color-white);
+          }
         }
 
-        span,
-        div {
-          border: none;
-          padding: 0px;
-          padding-left: $fib-6 * 1px;
+        & > label {
+          background-color: var(--color-bg-primary);
         }
-      }
 
-      span {
-        &.flex {
-          margin-top: auto;
-        }
-      }
+        & > img {
+          &.logo {
+            @extend .larger;
 
-      label {
-        position: absolute;
-        white-space: nowrap;
-        background-color: var(--color-bg-primary);
-        padding: $fib-5 * 1px $fib-6 * 1px;
-        margin: $fib-3 * 1px;
-        border-radius: $fib-5 * 1px;
-        border: 1px solid var(--color-border);
-        left: 100%;
-      }
+            margin-right: $fib-7 * 1px;
+            height: 100%;
+            aspect-ratio: 1/1;
+          }
 
-      div {
-        display: flex;
-        flex-direction: column;
-        justify-content: left;
-        margin-left: $fib-6 * 1px;
-
-        span {
-          padding: 0px;
-          width: fit-content;
+          &.larger {
+            scale: $fib-6 * 0.1;
+          }
         }
       }
 
       *:not(:hover),
       *.no-tooltip {
-        label {
+        label,
+        .tooltip {
           visibility: hidden;
+
+          &.delayed {
+            transition-delay: $fib-5 * 0.01s;
+            transition-property: visibility;
+          }
         }
-      }
-
-      *.large {
-        scale: $fib-6 * 0.1;
-      }
-
-      *.larger {
-        scale: $fib-11 * 0.01;
       }
 
       *.fitted {
         @extend .round-corners, .fib-4;
 
         height: 100%;
-        // width: 100%;
       }
 
       i,
