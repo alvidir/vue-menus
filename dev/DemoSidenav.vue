@@ -1,5 +1,5 @@
 <template>
-  <dock-menu position="horizontal" :expanded="expanded" flex>
+  <dock-menu position="horizontal" :flex="flex">
     <button class="no-hover no-tooltip" @click="switchExpanded">
       <img
         class="logo"
@@ -59,7 +59,6 @@ export default defineComponent({
   name: "DemoSidenav",
   data() {
     return {
-      expanded: false,
       flex: false,
       active: [false, false, false, false, false],
     };
@@ -72,7 +71,7 @@ export default defineComponent({
     },
 
     switchExpanded() {
-      this.expanded = !this.expanded;
+      this.flex = !this.flex;
     },
   },
 });

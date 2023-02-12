@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent } from "vue";
 import RegularMenu from "./RegularMenu.vue";
 
 export default defineComponent({
@@ -71,7 +71,8 @@ export default defineComponent({
         border: none;
       }
 
-      & > button {
+      & > button,
+      & > .item {
         @extend .round-corners, .fib-5;
 
         position: relative;

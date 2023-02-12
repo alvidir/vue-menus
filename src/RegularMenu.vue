@@ -73,7 +73,8 @@ export default defineComponent({
       }
     }
 
-    & > button {
+    & > button,
+    & > .item {
       @extend .round-corners, .fib-4;
 
       display: flex;
