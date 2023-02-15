@@ -1,6 +1,6 @@
 <template>
-  <dock-menu position="horizontal" :flex="flex">
-    <button class="no-hover no-tooltip" @click="switchExpanded">
+  <dock-menu position="horizontal">
+    <button class="no-hover no-tooltip">
       <img
         class="logo"
         src="https://raw.githubusercontent.com/alvidir/statics/main/pictures/svg/alvidir_logo.svg"
@@ -28,7 +28,6 @@
       <i class="bx bx-calendar-event"></i>
       <label>Events</label>
     </button>
-    <span class="dock"></span>
     <button class="flex">
       <i class="bx bx-cog"></i>
       <regular-menu class="tooltip bottom delayed" active="true">
@@ -59,7 +58,6 @@ export default defineComponent({
   name: "DemoSidenav",
   data() {
     return {
-      flex: false,
       active: [false, false, false, false, false],
     };
   },
@@ -68,10 +66,6 @@ export default defineComponent({
     onClick(index: number) {
       this.active = [false, false, false, false, false];
       this.active[index] = true;
-    },
-
-    switchExpanded() {
-      this.flex = !this.flex;
     },
   },
 });

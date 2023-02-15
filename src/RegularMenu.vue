@@ -16,7 +16,10 @@ export default defineComponent({
   name: "RegularMenu",
   directives: { ClickOutside },
   props: {
-    active: Boolean,
+    active: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   methods: {

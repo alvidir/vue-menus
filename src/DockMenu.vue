@@ -1,6 +1,6 @@
 <template>
-  <div class="dock-menu">
-    <regular-menu :active="active" :class="{ flex: flex }">
+  <div class="dock-menu" :class="{ active: active }">
+    <regular-menu>
       <slot></slot>
     </regular-menu>
   </div>
@@ -19,10 +19,6 @@ export default defineComponent({
     active: {
       type: Boolean,
       default: true,
-    },
-    flex: {
-      type: Boolean,
-      default: false,
     },
   },
 
@@ -46,8 +42,8 @@ export default defineComponent({
   justify-content: center;
   box-sizing: border-box;
   align-items: center;
-  height: 100%;
   width: fit-content;
+  height: 100%;
   margin-left: $fib-4 * 1px;
   padding-top: $fib-4 * 1px;
   padding-bottom: $fib-4 * 1px;
@@ -58,18 +54,9 @@ export default defineComponent({
     min-width: fit-content;
     min-height: fit-content;
 
-    &.flex {
-      height: 100%;
-    }
-
     & > .options {
       width: fit-content;
       height: 100%;
-
-      & > span.dock {
-        height: 100%;
-        border: none;
-      }
 
       & > button,
       & > .item {
