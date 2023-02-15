@@ -49,7 +49,7 @@ export default defineComponent({
   padding-bottom: $fib-4 * 1px;
 
   & > .regular-menu {
-    @extend .round-corners, .fib-6;
+    @extend .round-corners-fib-6;
 
     min-width: fit-content;
     min-height: fit-content;
@@ -60,7 +60,7 @@ export default defineComponent({
 
       & > button,
       & > .item {
-        @extend .round-corners, .fib-5;
+        @extend .round-corners;
 
         position: relative;
         height: $fib-9 * 1px;
@@ -96,7 +96,7 @@ export default defineComponent({
         }
 
         &.active {
-          background: var(--color-button-active);
+          background: var(--color-bg-highlight);
           & > i {
             color: var(--color-white);
           }
@@ -135,7 +135,7 @@ export default defineComponent({
       }
 
       *.fitted {
-        @extend .round-corners, .fib-4;
+        @extend .round-corners-fib-4;
 
         height: 100%;
       }

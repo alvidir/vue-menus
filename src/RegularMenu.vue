@@ -78,7 +78,7 @@ export default defineComponent({
 
     & > button,
     & > .item {
-      @extend .round-corners, .fib-4;
+      @extend .round-corners-fib-4;
 
       display: flex;
       justify-content: flex-start;
