@@ -92,6 +92,7 @@ export default defineComponent({
           white-space: nowrap;
           border-radius: $fib-5 * 1px;
           border: 1px solid var(--color-border);
+          background-color: var(--color-bg-primary);
           padding: $fib-5 * 1px $fib-6 * 1px;
         }
 
@@ -100,10 +101,6 @@ export default defineComponent({
           & > i {
             color: var(--color-white);
           }
-        }
-
-        & > label {
-          background-color: var(--color-bg-primary);
         }
 
         & > img {

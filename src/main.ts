@@ -15,4 +15,4 @@ function include(app: App): App {
 }
 
 export default include;
-export { RegularMenu, ContextMenu };
+export { RegularMenu, ContextMenu, DockMenu };
