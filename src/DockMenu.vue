@@ -10,10 +10,6 @@
 import { defineComponent } from "vue";
 import RegularMenu from "./RegularMenu.vue";
 
-interface Overflow {
-  y: boolean;
-}
-
 export default defineComponent({
   name: "DockMenu",
   components: {
@@ -49,14 +45,14 @@ export default defineComponent({
   margin-left: $fib-4 * 1px;
   padding-top: $fib-4 * 1px;
   padding-bottom: $fib-4 * 1px;
-  overflow: auto;
-  overflow-x: hidden;
-  scrollbar-width: none; /* Firefox */
+  // overflow: auto;
+  // overflow-x: hidden;
+  // scrollbar-width: none; /* Firefox */
 
-  &::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-  }
+  // &::-webkit-scrollbar {
+  //   width: 0;
+  //   height: 0;
+  // }
 
   & > .regular-menu {
     @extend .round-corners-fib-6;
@@ -64,7 +60,7 @@ export default defineComponent({
     margin-top: auto;
     margin-bottom: auto;
     min-height: fit-content;
-    width: fit-content() !important;
+    min-width: fit-content;
     background: none;
     border: none;
 
