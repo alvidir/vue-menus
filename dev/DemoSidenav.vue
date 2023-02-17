@@ -1,5 +1,5 @@
 <template>
-  <dock-menu position="horizontal">
+  <dock-menu>
     <button class="no-hover no-tooltip">
       <img
         class="logo"
@@ -30,7 +30,7 @@
     </button>
     <button class="flex">
       <i class="bx bx-cog"></i>
-      <regular-menu class="tooltip bottom delayed" active="true">
+      <regular-menu class="tooltip bottom delayed" :active="true">
         <button>option 1</button>
         <button>option 2</button>
         <button>option 3</button>
@@ -73,7 +73,6 @@ export default defineComponent({
 
 <style lang="scss">
 @import "fibonacci-styles";
-
 .column {
   display: flex;
   flex-direction: column;

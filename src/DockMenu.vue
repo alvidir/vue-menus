@@ -1,5 +1,5 @@
 <template>
-  <div class="dock-menu" :class="{ active: active }">
+  <div id="dock-menu" :class="{ active: active }">
     <regular-menu>
       <slot></slot>
     </regular-menu>
@@ -9,6 +9,10 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import RegularMenu from "./RegularMenu.vue";
+
+interface Overflow {
+  y: boolean;
+}
 
 export default defineComponent({
   name: "DockMenu",
@@ -23,40 +27,52 @@ export default defineComponent({
   },
 
   data() {
-    return {};
+    return {
+      overflow: false,
+    };
   },
-
-  computed: {},
-
-  methods: {},
 });
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-.dock-menu {
+#dock-menu {
   @import "fibonacci-styles";
 
-  position: absolute;
   display: flex;
-  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
   box-sizing: border-box;
-  align-items: center;
   width: fit-content;
   height: 100%;
   margin-left: $fib-4 * 1px;
   padding-top: $fib-4 * 1px;
   padding-bottom: $fib-4 * 1px;
+  overflow: auto;
+  overflow-x: hidden;
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
 
   & > .regular-menu {
     @extend .round-corners-fib-6;
 
-    min-width: fit-content;
+    margin-top: auto;
+    margin-bottom: auto;
     min-height: fit-content;
+    width: fit-content() !important;
+    background: none;
+    border: none;
 
     & > .options {
+      @extend .round-corners-fib-6;
+      background: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
       width: fit-content;
-      height: 100%;
 
       & > button,
       & > .item {

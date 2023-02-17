@@ -39,7 +39,6 @@
       </div>
     </div>
     <div class="demo-set theme-dark">
-      <demo-sidenav></demo-sidenav>
       <div
         class="demo-subset bg-secondary"
         @mouseup.right="activateContextMenu(3)"
