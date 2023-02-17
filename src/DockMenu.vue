@@ -45,14 +45,23 @@ export default defineComponent({
   margin-left: $fib-4 * 1px;
   padding-top: $fib-4 * 1px;
   padding-bottom: $fib-4 * 1px;
-  // overflow: auto;
-  // overflow-x: hidden;
-  // scrollbar-width: none; /* Firefox */
 
-  // &::-webkit-scrollbar {
-  //   width: 0;
-  //   height: 0;
-  // }
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  &:not(:hover) > .regular-menu {
+    min-width: fit-content;
+  }
+
+  &:hover > .regular-menu {
+    min-width: 100vw;
+  }
 
   & > .regular-menu {
     @extend .round-corners-fib-6;
@@ -60,7 +69,7 @@ export default defineComponent({
     margin-top: auto;
     margin-bottom: auto;
     min-height: fit-content;
-    min-width: fit-content;
+    // min-width: fit-content;
     background: none;
     border: none;
 
