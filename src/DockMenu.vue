@@ -1,6 +1,10 @@
 <template>
   <div id="dock-menu" :class="{ hideable: hideable }">
-    <regular-menu :class="{ 'fit-container': over }" @mouseover="onMouseEnter">
+    <regular-menu
+      :class="{ 'fit-container': over }"
+      :active="active"
+      @mouseover="onMouseEnter"
+    >
       <slot></slot>
     </regular-menu>
   </div>
@@ -16,6 +20,10 @@ export default defineComponent({
     RegularMenu,
   },
   props: {
+    active: {
+      type: Boolean,
+      default: true,
+    },
     hideable: {
       type: Boolean,
       default: false,
