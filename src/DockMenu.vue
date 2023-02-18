@@ -1,6 +1,6 @@
 <template>
-  <div id="dock-menu" :class="{ active: active }">
-    <regular-menu :class="{ over: over }" @mouseover="onMouseEnter">
+  <div id="dock-menu" :class="{ hideable: hideable }">
+    <regular-menu :class="{ 'fit-container': over }" @mouseover="onMouseEnter">
       <slot></slot>
     </regular-menu>
   </div>
@@ -16,9 +16,9 @@ export default defineComponent({
     RegularMenu,
   },
   props: {
-    active: {
+    hideable: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
 
@@ -32,12 +32,18 @@ export default defineComponent({
   methods: {
     onMouseEnter(event: MouseEvent) {
       clearTimeout(this.timeout);
+      const over = document.elementFromPoint(event.clientX, event.clientY);
+
+      if (
+        over?.className !== "regular-menu" ||
+        over?.parentElement?.id !== "dock-menu"
+      ) {
+        this.over = false;
+        return;
+      }
 
       this.timeout = setTimeout(() => {
-        const over = document.elementFromPoint(event.clientX, event.clientY);
-        this.over =
-          over?.className == "regular-menu" &&
-          over.parentElement?.id === "dock-menu";
+        this.over = true;
       }, 200);
     },
   },
@@ -46,8 +52,10 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
+@import "fibonacci-styles";
+
 #dock-menu {
-  @import "fibonacci-styles";
+  @extend .smooth;
 
   display: flex;
   position: fixed;
@@ -56,13 +64,20 @@ export default defineComponent({
   box-sizing: border-box;
   width: fit-content;
   height: 100%;
-  margin-left: $fib-4 * 1px;
-  padding-top: $fib-4 * 1px;
-  padding-bottom: $fib-4 * 1px;
+  padding: $fib-4 * 1px;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: none; /* Firefox */
   z-index: 3;
+
+  transition-property: transform;
+
+  &.hideable {
+    &:not(:hover) {
+      $distance: $fib-4 + $fib-5 + $fib-9;
+      transform: translateX($distance * -1px);
+    }
+  }
 
   &::-webkit-scrollbar {
     width: 0;
@@ -73,8 +88,8 @@ export default defineComponent({
     min-width: fit-content;
   }
 
-  &:hover > .regular-menu:not(.over) {
-    min-width: 100vw;
+  &:hover > .regular-menu:not(.fit-container) {
+    width: 100vw;
   }
 
   & > .regular-menu {

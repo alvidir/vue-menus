@@ -1,5 +1,5 @@
 <template>
-  <dock-menu>
+  <dock-menu :hideable="hideable">
     <button class="no-hover no-tooltip">
       <img
         class="logo"
@@ -8,23 +8,23 @@
       />
       <label>This tooltip is never shown</label>
     </button>
-    <button :class="{ active: active[0] }" @click="onClick(0)">
+    <button :class="{ active: focus[0] }" @click="onIconClick(0)">
       <i class="bx bx-search-alt"></i>
       <label>Search...</label>
     </button>
-    <button :class="{ active: active[1] }" @click="onClick(1)">
+    <button :class="{ active: focus[1] }" @click="onIconClick(1)">
       <i class="bx bx-cabinet"></i>
       <label>Projects</label>
     </button>
-    <button :class="{ active: active[2] }" @click="onClick(2)">
+    <button :class="{ active: focus[2] }" @click="onIconClick(2)">
       <i class="bx bx-user-pin"></i>
       <label>Characters</label>
     </button>
-    <button :class="{ active: active[3] }" @click="onClick(3)">
+    <button :class="{ active: focus[3] }" @click="onIconClick(3)">
       <i class="bx bxs-castle"></i>
       <label>Locations</label>
     </button>
-    <button :class="{ active: active[4] }" @click="onClick(4)">
+    <button :class="{ active: focus[4] }" @click="onIconClick(4)">
       <i class="bx bx-calendar-event"></i>
       <label>Events</label>
     </button>
@@ -58,15 +58,22 @@ export default defineComponent({
   name: "DemoSidenav",
   data() {
     return {
-      active: [false, false, false, false, false],
+      hideable: false,
+      focus: [false, false, false, false, false],
     };
   },
 
   methods: {
-    onClick(index: number) {
-      this.active = [false, false, false, false, false];
-      this.active[index] = true;
+    onIconClick(index: number) {
+      this.focus = [false, false, false, false, false];
+      this.focus[index] = true;
     },
+  },
+
+  mounted() {
+    setTimeout(() => {
+      this.hideable = true;
+    }, 3000);
   },
 });
 </script>
