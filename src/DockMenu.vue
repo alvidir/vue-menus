@@ -1,6 +1,6 @@
 <template>
   <div id="dock-menu" :class="{ active: active }">
-    <regular-menu>
+    <regular-menu :class="{ over: over }" @mouseover="onMouseEnter">
       <slot></slot>
     </regular-menu>
   </div>
@@ -24,8 +24,22 @@ export default defineComponent({
 
   data() {
     return {
-      overflow: false,
+      over: false,
+      timeout: undefined as number | undefined,
     };
+  },
+
+  methods: {
+    onMouseEnter(event: MouseEvent) {
+      clearTimeout(this.timeout);
+
+      this.timeout = setTimeout(() => {
+        const over = document.elementFromPoint(event.clientX, event.clientY);
+        this.over =
+          over?.className == "regular-menu" &&
+          over.parentElement?.id === "dock-menu";
+      }, 200);
+    },
   },
 });
 </script>
@@ -59,7 +73,7 @@ export default defineComponent({
     min-width: fit-content;
   }
 
-  &:hover > .regular-menu {
+  &:hover > .regular-menu:not(.over) {
     min-width: 100vw;
   }
 
@@ -69,7 +83,7 @@ export default defineComponent({
     margin-top: auto;
     margin-bottom: auto;
     min-height: fit-content;
-    // min-width: fit-content;
+    min-width: fit-content;
     background: none;
     border: none;
 
