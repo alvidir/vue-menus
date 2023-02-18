@@ -59,10 +59,10 @@ export default defineComponent({
   margin-left: $fib-4 * 1px;
   padding-top: $fib-4 * 1px;
   padding-bottom: $fib-4 * 1px;
-
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: none; /* Firefox */
+  z-index: 3;
 
   &::-webkit-scrollbar {
     width: 0;
