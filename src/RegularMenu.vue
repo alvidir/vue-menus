@@ -1,5 +1,5 @@
 <template>
-  <div v-if="active" class="regular-menu" v-click-outside="onClose">
+  <div v-if="active" class="regular-menu">
     <div class="options">
       <slot></slot>
     </div>
@@ -8,23 +8,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { ClickOutside } from "vue-directives/src/main";
-
-export const CLOSE_EVENT_NAME = "close";
 
 export default defineComponent({
   name: "RegularMenu",
-  directives: { ClickOutside },
   props: {
     active: {
       type: Boolean,
       default: true,
-    },
-  },
-
-  methods: {
-    onClose() {
-      this.$emit(CLOSE_EVENT_NAME);
     },
   },
 });

@@ -1,5 +1,5 @@
 <template>
-  <regular-menu class="context-menu" :active="active" @close="onClose">
+  <regular-menu class="context-menu" :active="active" v-click-outside="onClose">
     <div class="options">
       <slot></slot>
     </div>
@@ -19,7 +19,9 @@ export default defineComponent({
   components: {
     RegularMenu,
   },
-  directives: { ClickOutside },
+  directives: {
+    ClickOutside,
+  },
   props: {
     active: Boolean,
   },
