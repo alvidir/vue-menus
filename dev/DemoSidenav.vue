@@ -1,5 +1,6 @@
 <template>
   <dock-menu :hideable="hideable">
+    <switch-button color="var(--color-accent)"></switch-button>
     <button class="no-hover no-tooltip">
       <img
         class="logo"
@@ -28,26 +29,26 @@
       <i class="bx bx-calendar-event"></i>
       <label>Events</label>
     </button>
-    <button class="flex">
+    <div class="item flex">
       <i class="bx bx-cog"></i>
       <regular-menu class="tooltip bottom delayed" :active="true">
         <button>option 1</button>
         <button>option 2</button>
         <button>option 3</button>
       </regular-menu>
-    </button>
+    </div>
     <span></span>
-    <button>
+    <div class="item">
       <img
         class="fitted larger"
         src="https://assets.rawpixel.com/cover_png_400/Y29sbGVjdGlvbi9jb3Zlci9zY3JlZW5fc2hvdF8yMDE3LTA5LTE0X2F0XzMuMTQuMTBfcG0ucG5n.png?s=GkJuAnvHugH9-RJK6N_Y0MbIdONQw8fHcH4IS33-n_E"
         alt=""
       />
       <div class="tooltip">
-        <span class="title">Username</span>
+        <span class="title">Username</span><br />
         <small>Something interesting</small>
       </div>
-    </button>
+    </div>
   </dock-menu>
 </template>
 
@@ -56,6 +57,7 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "DemoSidenav",
+
   data() {
     return {
       hideable: false,
@@ -86,8 +88,6 @@ export default defineComponent({
 }
 
 .title {
-  display: flex;
-  justify-content: left;
   font-weight: 600;
 }
 

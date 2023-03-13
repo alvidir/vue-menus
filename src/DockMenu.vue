@@ -176,7 +176,7 @@ export default defineComponent({
         }
       }
 
-      *:not(:hover),
+      & > *:not(:hover),
       *.no-tooltip {
         label,
         .tooltip {
