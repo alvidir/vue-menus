@@ -1,87 +1,71 @@
-<template>
-  <regular-menu class="context-menu" :active="active" v-click-outside="onClose">
-    <div class="options">
-      <slot></slot>
-    </div>
-  </regular-menu>
-</template>
+<script setup lang="ts">
+import {
+  defineProps,
+  defineEmits,
+  watch,
+  ref,
+  onMounted,
+  onUnmounted,
+} from "vue";
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import RegularMenu from "./RegularMenu.vue";
-import { ClickOutside } from "vue-directives/src/main";
+interface Props {
+  active?: boolean;
+}
 
-export const CLOSE_EVENT_NAME = "close";
+const props = defineProps<Props>();
 
-export default defineComponent({
-  name: "ContextMenu",
-  events: [CLOSE_EVENT_NAME],
-  components: {
-    RegularMenu,
-  },
-  directives: {
-    ClickOutside,
-  },
-  props: {
-    active: Boolean,
-  },
+interface Events {
+  (e: "close", payload: MouseEvent): void;
+}
 
-  watch: {
-    active() {
-      if (this.active) this.updatePosition();
-    },
-  },
+const emit = defineEmits<Events>();
 
-  data() {
-    return {
-      live: {
-        mousePosX: 0,
-        mousePosY: 0,
-      },
-      current: {
-        mousePosX: 0,
-        mousePosY: 0,
-      },
-    };
-  },
+const left = ref(0);
+const top = ref(0);
 
-  computed: {
-    top(): string {
-      return `${this.current.mousePosY}px`;
-    },
+watch(
+  () => props.active,
+  (active) => {
+    if (active) {
+      left.value = mousePosition.pageX;
+      top.value = mousePosition.pageY;
+    }
+  }
+);
 
-    left(): string {
-      return `${this.current.mousePosX}px`;
-    },
-  },
+interface MousePosition {
+  pageX: number;
+  pageY: number;
+}
 
-  methods: {
-    onClose() {
-      this.$emit(CLOSE_EVENT_NAME);
-    },
+let mousePosition: MousePosition = {
+  pageX: 0,
+  pageY: 0,
+};
 
-    updatePosition() {
-      this.current.mousePosX = this.live.mousePosX;
-      this.current.mousePosY = this.live.mousePosY;
-    },
+const onMousemoveEvent = (event: MouseEvent) => {
+  mousePosition = event;
+};
 
-    onMouseEvent(event: MouseEvent) {
-      this.live.mousePosX = event.pageX;
-      this.live.mousePosY = event.pageY;
-    },
-  },
+onMounted(() => {
+  document.addEventListener("mousemove", onMousemoveEvent);
+});
 
-  mounted() {
-    document.addEventListener("mousemove", this.onMouseEvent);
-  },
-
-  unmounted() {
-    document.removeEventListener("mousemove", this.onMouseEvent);
-  },
+onUnmounted(() => {
+  document.removeEventListener("mousemove", onMousemoveEvent);
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+<template>
+  <regular-menu
+    v-if="active"
+    class="context-menu"
+    v-click-outside="(event: MouseEvent) => emit('close', event)"
+  >
+    <slot></slot>
+  </regular-menu>
+</template>
+
 <style lang="scss">
 .context-menu {
   position: absolute !important;

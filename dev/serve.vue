@@ -38,33 +38,6 @@
         </context-menu>
       </div>
     </div>
-    <div class="demo-set theme-dark">
-      <div
-        class="demo-subset bg-secondary"
-        @mouseup.right="activateContextMenu(3)"
-        @contextmenu.prevent
-      >
-        <context-menu :active="contextMenus[3]" @close="hideContextMenu(3)">
-          <span>First section</span>
-          <button>An option</button>
-          <button>Another option</button>
-          <span class="danger">Danger zone</span>
-          <button class="danger">
-            <i class="bx bxs-message-alt-error"></i>An option
-          </button>
-        </context-menu>
-      </div>
-      <div
-        class="demo-subset bg-primary"
-        @mouseup.right="activateContextMenu(4)"
-        @contextmenu.prevent
-      >
-        <context-menu :active="contextMenus[4]" @close="hideContextMenu(4)">
-          <button>An option</button>
-          <button>Another option</button>
-        </context-menu>
-      </div>
-    </div>
   </div>
 </template>
 
