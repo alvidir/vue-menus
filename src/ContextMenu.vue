@@ -29,7 +29,6 @@ watch(
 </script>
 
 <template>
-  <h1>{{ x }} - {{ y }}</h1>
   <regular-menu
     v-show="active"
     class="context-menu"
