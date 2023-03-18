@@ -1,12 +1,7 @@
 <script setup lang="ts">
-import {
-  defineProps,
-  defineEmits,
-  watch,
-  ref,
-  onMounted,
-  onUnmounted,
-} from "vue";
+import { defineProps, defineEmits, watch, ref } from "vue";
+import { useMouse } from "./mouse";
+import { ClickOutside as vClickOutside } from "vue-directives/src/main";
 
 interface Props {
   active?: boolean;
@@ -20,45 +15,23 @@ interface Events {
 
 const emit = defineEmits<Events>();
 
-const left = ref(0);
-const top = ref(0);
+const { x, y } = useMouse();
+const left = ref(x.value);
+const top = ref(y.value);
 
 watch(
   () => props.active,
-  (active) => {
-    if (active) {
-      left.value = mousePosition.pageX;
-      top.value = mousePosition.pageY;
-    }
+  () => {
+    left.value = x.value;
+    top.value = y.value;
   }
 );
-
-interface MousePosition {
-  pageX: number;
-  pageY: number;
-}
-
-let mousePosition: MousePosition = {
-  pageX: 0,
-  pageY: 0,
-};
-
-const onMousemoveEvent = (event: MouseEvent) => {
-  mousePosition = event;
-};
-
-onMounted(() => {
-  document.addEventListener("mousemove", onMousemoveEvent);
-});
-
-onUnmounted(() => {
-  document.removeEventListener("mousemove", onMousemoveEvent);
-});
 </script>
 
 <template>
+  <h1>{{ x }} - {{ y }}</h1>
   <regular-menu
-    v-if="active"
+    v-show="active"
     class="context-menu"
     v-click-outside="(event: MouseEvent) => emit('close', event)"
   >
@@ -67,9 +40,11 @@ onUnmounted(() => {
 </template>
 
 <style lang="scss">
+@import "fibonacci-styles";
+
 .context-menu {
   position: absolute !important;
-  left: v-bind(left);
-  top: v-bind(top);
+  left: calc(v-bind(left) * 1px);
+  top: calc(v-bind(top) * 1px);
 }
 </style>

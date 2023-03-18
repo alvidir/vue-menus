@@ -1,8 +1,8 @@
 import { createApp } from "vue";
-import Dev from "./serve.vue";
+import App from "./App.vue";
 import include from "../src/main";
 
-const app = createApp(Dev);
+const app = createApp(App);
 include(app);
 
 app.mount("#app");

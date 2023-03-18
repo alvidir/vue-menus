@@ -1,6 +1,5 @@
 <template>
   <dock-menu :hideable="hideable">
-    <switch-button color="var(--color-accent)"></switch-button>
     <button class="no-hover no-tooltip">
       <img
         class="logo"

@@ -1,3 +1,18 @@
+<script setup lang="ts">
+import { ref } from "vue";
+import DemoSidenav from "./DemoSidenav.vue";
+
+const showContextMenu = ref(false);
+
+const hideContextMenu = () => {
+  showContextMenu.value = false;
+};
+
+const activateContextMenu = () => {
+  showContextMenu.value = true;
+};
+</script>
+
 <template>
   <link
     href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
@@ -14,10 +29,10 @@
       <demo-sidenav></demo-sidenav>
       <div
         class="demo-subset bg-secondary"
-        @mouseup.right="activateContextMenu(1)"
+        @mouseup.right="activateContextMenu"
         @contextmenu.prevent
       >
-        <context-menu :active="contextMenus[1]" @close="hideContextMenu(1)">
+        <context-menu :active="showContextMenu" @close="hideContextMenu">
           <span>First section</span>
           <button>An option</button>
           <button>Another option</button>
@@ -27,52 +42,9 @@
           </button>
         </context-menu>
       </div>
-      <div
-        class="demo-subset bg-primary"
-        @mouseup.right="activateContextMenu(2)"
-        @contextmenu.prevent
-      >
-        <context-menu :active="contextMenus[2]" @close="hideContextMenu(2)">
-          <button>An option</button>
-          <button>Another option</button>
-        </context-menu>
-      </div>
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-import DemoSidenav from "./DemoSidenav.vue";
-
-export default defineComponent({
-  name: "ServeDev",
-  components: { DemoSidenav },
-  data() {
-    return {
-      expanded: false,
-      flex: false,
-      contextMenus: { 1: false, 2: false, 3: false, 4: false } as {
-        [key: number]: boolean;
-      },
-    };
-  },
-
-  methods: {
-    activateContextMenu(key: number) {
-      this.contextMenus[key] = true;
-    },
-
-    hideContextMenu(key: number) {
-      this.contextMenus[key] = false;
-    },
-
-    switchExpanded() {
-      this.expanded = !this.expanded;
-    },
-  },
-});
-</script>
 
 <style lang="scss">
 @import "fibonacci-styles";
@@ -113,7 +85,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 50%;
+    height: 100%;
 
     &.bg-primary {
       background-color: var(--color-bg-primary) !important;
