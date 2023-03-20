@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, provide } from "vue";
 import DemoSidenav from "./DemoSidenav.vue";
+import Profile from "../src/profile";
+
+provide("profile", new Profile("", ""));
 
 const showContextMenu = ref(false);
 
@@ -25,7 +28,7 @@ const activateContextMenu = () => {
     rel="stylesheet"
   />
   <div id="app">
-    <div class="demo-set theme-light">
+    <div class="demo-set">
       <demo-sidenav></demo-sidenav>
       <div
         class="demo-subset bg-secondary"
@@ -65,47 +68,6 @@ body {
   position: relative;
   min-height: 100vh;
   width: 100%;
-}
-
-.demo-set {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100vh;
-
-  &.light {
-    @extend .theme-light;
-  }
-
-  &.dark {
-    @extend .theme-dark;
-  }
-
-  .demo-subset {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-
-    &.bg-primary {
-      background-color: var(--color-bg-primary) !important;
-    }
-
-    &.bg-secondary {
-      background-color: var(--color-bg-secondary) !important;
-    }
-  }
-}
-
-.demo-item {
-  flex: 1;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 200px;
-  padding-right: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  background-color: var(--color-bg-secondary);
 }
 </style>

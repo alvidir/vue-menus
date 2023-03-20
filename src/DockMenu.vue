@@ -117,8 +117,7 @@ const onMouseEnter = (event: MouseEvent) => {
           top: 0px !important;
         }
 
-        & > label,
-        & > .tooltip {
+        & > label {
           @extend .shadow-box;
           @extend .absolute;
 
@@ -127,6 +126,11 @@ const onMouseEnter = (event: MouseEvent) => {
           border: 1px solid var(--color-border);
           background-color: var(--color-bg-primary);
           padding: $fib-5 * 1px $fib-6 * 1px;
+        }
+
+        & > .tooltip {
+          @extend .shadow-box;
+          @extend .absolute;
         }
 
         &.active {
@@ -152,9 +156,9 @@ const onMouseEnter = (event: MouseEvent) => {
       }
 
       & > *:not(:hover),
-      *.no-tooltip {
-        label,
-        .tooltip {
+      & > *.no-tooltip {
+        & > label,
+        & > .tooltip {
           visibility: hidden;
 
           &.delayed {
