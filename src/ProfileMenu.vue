@@ -68,6 +68,7 @@ interface Theme {
   & > i {
     color: var(--color-text-secondary);
     box-sizing: border-box;
+    padding-right: $fib-4 * 1px;
   }
 
   &:not(:hover) i {
