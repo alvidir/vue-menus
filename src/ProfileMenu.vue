@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { defineEmits, inject } from "vue";
+import { defineProps, defineEmits } from "vue";
 import { SwitchButton } from "vue-buttons/src/main";
 
-interface Profile {
+interface Props {
   id: string;
   name: string;
   theme: Theme;
 }
+
+const props = defineProps<Props>();
 
 interface Events {
   (e: "signout", payload: MouseEvent): void;
@@ -20,8 +22,6 @@ interface Theme {
   isDarkTheme: () => boolean;
   switchTheme: () => void;
 }
-
-const profile = inject<Profile>("profile");
 </script>
 
 <template>
@@ -29,8 +29,8 @@ const profile = inject<Profile>("profile");
     <div class="header item no-hover">
       <div class="username">
         <small>Signed in as</small>
-        <strong v-if="profile?.name">{{ profile.name }}</strong>
-        <strong v-else-if="profile?.id">Unnamed user</strong>
+        <strong v-if="name">{{ name }}</strong>
+        <strong v-else-if="id">Unnamed user</strong>
         <strong v-else>Guest user</strong>
       </div>
       <i class="bx bxs-pencil" @click="emit('edit', $event)"></i>
@@ -39,12 +39,12 @@ const profile = inject<Profile>("profile");
     <div class="option item no-hover">
       Dark theme
       <switch-button
-        :checked="profile?.theme.isDarkTheme()"
-        @switch="profile?.theme.switchTheme()"
+        :checked="theme.isDarkTheme()"
+        @switch="theme.switchTheme()"
       ></switch-button>
     </div>
     <span></span>
-    <button v-if="profile?.id" @click="emit('signout', $event)">
+    <button v-if="id" @click="emit('signout', $event)">
       <i class="bx bx-log-out"></i>
       <span>Sign out</span>
     </button>
@@ -68,7 +68,6 @@ const profile = inject<Profile>("profile");
   & > i {
     color: var(--color-text-secondary);
     box-sizing: border-box;
-    padding: $fib-6 * 1px;
   }
 
   &:not(:hover) i {

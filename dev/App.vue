@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { ref, provide } from "vue";
 import DemoSidenav from "./DemoSidenav.vue";
-import Profile from "../src/profile";
-
-provide("profile", new Profile("", ""));
 
 const showContextMenu = ref(false);
 

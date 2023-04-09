@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import Profile from "../src/profile";
 
 const hideable = ref(false);
 const focus = ref([false, false, false, false, false]);
+const profile = new Profile("", "");
 
 const onIconClick = (index: number) => {
   focus.value = [false, false, false, false, false];
@@ -66,6 +68,7 @@ onMounted(() => {
         alt=""
       />
       <profile-menu
+        v-bind="profile"
         class="tooltip bottom delayed"
         @signout="onEvent('signout')"
         @signup="onEvent('signup')"
