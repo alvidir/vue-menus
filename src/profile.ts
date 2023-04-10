@@ -1,15 +1,13 @@
 import Theme from "./theme";
 
 class Profile {
-  id: string;
-  name: string;
+  name?: string;
   picture?: string;
   theme: Theme;
 
-  constructor(id: string, name: string) {
+  constructor(name: string) {
     this.theme = new Theme();
     this.name = name;
-    this.id = id;
   }
 }
 

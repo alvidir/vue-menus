@@ -3,7 +3,6 @@ import { defineProps, defineEmits } from "vue";
 import { SwitchButton } from "vue-buttons/src/main";
 
 interface Props {
-  id: string;
   name: string;
   theme: Theme;
 }
@@ -30,7 +29,6 @@ interface Theme {
       <div class="username">
         <small>Signed in as</small>
         <strong v-if="name">{{ name }}</strong>
-        <strong v-else-if="id">Unnamed user</strong>
         <strong v-else>Guest user</strong>
       </div>
       <i class="bx bxs-pencil" @click="emit('edit', $event)"></i>
@@ -44,7 +42,7 @@ interface Theme {
       ></switch-button>
     </div>
     <span></span>
-    <button v-if="id" @click="emit('signout', $event)">
+    <button v-if="name" @click="emit('signout', $event)">
       <i class="bx bx-log-out"></i>
       <span>Sign out</span>
     </button>

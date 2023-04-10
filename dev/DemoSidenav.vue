@@ -4,7 +4,7 @@ import Profile from "../src/profile";
 
 const hideable = ref(false);
 const focus = ref([false, false, false, false, false]);
-const profile = new Profile("", "");
+const profile = new Profile("");
 
 const onIconClick = (index: number) => {
   focus.value = [false, false, false, false, false];
