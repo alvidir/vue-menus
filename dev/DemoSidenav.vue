@@ -1,18 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import Profile from "../src/profile";
 
 const hideable = ref(false);
 const focus = ref([false, false, false, false, false]);
-const profile = new Profile("");
 
 const onIconClick = (index: number) => {
   focus.value = [false, false, false, false, false];
   focus.value[index] = true;
-};
-
-const onEvent = (name: string) => {
-  console.log(`got a ${name} event`);
 };
 
 onMounted(() => {
@@ -67,14 +61,6 @@ onMounted(() => {
         src="https://assets.rawpixel.com/cover_png_400/Y29sbGVjdGlvbi9jb3Zlci9zY3JlZW5fc2hvdF8yMDE3LTA5LTE0X2F0XzMuMTQuMTBfcG0ucG5n.png?s=GkJuAnvHugH9-RJK6N_Y0MbIdONQw8fHcH4IS33-n_E"
         alt=""
       />
-      <profile-menu
-        v-bind="profile"
-        class="tooltip bottom delayed"
-        @signout="onEvent('signout')"
-        @signup="onEvent('signup')"
-        @edit="onEvent('edit')"
-      >
-      </profile-menu>
     </div>
   </dock-menu>
 </template>
