@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, provide } from "vue";
+import { ref } from "vue";
 import DemoSidenav from "./DemoSidenav.vue";
 
 const showContextMenu = ref(false);
