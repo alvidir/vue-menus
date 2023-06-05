@@ -48,7 +48,7 @@ onMounted(() => {
     </button>
     <div class="item flex">
       <i class="bx bx-cog"></i>
-      <regular-menu class="tooltip bottom delayed" :active="true">
+      <regular-menu class="tooltip bottom" :active="true">
         <button>option 1</button>
         <button>option 2</button>
         <button>option 3</button>
