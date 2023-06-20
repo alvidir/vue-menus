@@ -1,26 +1,11 @@
 <template>
-  <div v-if="active" class="regular-menu">
+  <div class="regular-menu">
     <div class="options">
       <slot></slot>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "RegularMenu",
-  props: {
-    active: {
-      type: Boolean,
-      default: true,
-    },
-  },
-});
-</script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 @import "fibonacci-styles";
 
@@ -34,7 +19,7 @@ export default defineComponent({
   border: 1px solid var(--color-border);
   z-index: 1;
 
-  .options {
+  & > .options {
     display: flex;
     flex-direction: column;
     height: 100%;

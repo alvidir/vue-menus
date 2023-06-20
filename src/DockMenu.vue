@@ -1,70 +1,45 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+interface Props {
+  hideable?: boolean;
+}
+
+defineProps<Props>();
+
+const over = ref(false);
+let timeout: number | undefined = undefined;
+
+const onMouseEnter = (event: MouseEvent) => {
+  clearTimeout(timeout);
+  const element = document.elementFromPoint(event.clientX, event.clientY);
+
+  if (
+    !element?.className.includes("regular-menu") ||
+    !element?.parentElement?.id.includes("dock-menu")
+  ) {
+    over.value = false;
+    return;
+  }
+
+  timeout = setTimeout(() => {
+    over.value = true;
+  }, 200);
+};
+</script>
+
 <template>
   <div id="dock-menu" :class="{ hideable: hideable }">
-    <regular-menu
-      :class="{ 'fit-container': over }"
-      :active="active"
-      @mouseover="onMouseEnter"
-    >
+    <regular-menu :class="{ 'fit-container': over }" @mouseover="onMouseEnter">
       <slot></slot>
     </regular-menu>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import RegularMenu from "./RegularMenu.vue";
-
-export default defineComponent({
-  name: "DockMenu",
-  components: {
-    RegularMenu,
-  },
-  props: {
-    active: {
-      type: Boolean,
-      default: true,
-    },
-    hideable: {
-      type: Boolean,
-      default: false,
-    },
-  },
-
-  data() {
-    return {
-      over: false,
-      timeout: undefined as number | undefined,
-    };
-  },
-
-  methods: {
-    onMouseEnter(event: MouseEvent) {
-      clearTimeout(this.timeout);
-      const over = document.elementFromPoint(event.clientX, event.clientY);
-
-      if (
-        over?.className !== "regular-menu" ||
-        over?.parentElement?.id !== "dock-menu"
-      ) {
-        this.over = false;
-        return;
-      }
-
-      this.timeout = setTimeout(() => {
-        this.over = true;
-      }, 200);
-    },
-  },
-});
-</script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 @import "fibonacci-styles";
 
 #dock-menu {
-  @extend .smooth;
-
   display: flex;
   position: fixed;
   top: 0;
@@ -78,7 +53,7 @@ export default defineComponent({
   scrollbar-width: none; /* Firefox */
   z-index: 3;
 
-  transition-property: transform;
+  transition: transform $slower-fade;
 
   &.hideable {
     &:not(:hover) {
@@ -130,6 +105,23 @@ export default defineComponent({
           position: absolute;
           margin-left: $fib-5 * 1px;
           left: 100%;
+
+          &::before,
+          &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: $fib-6 * 1px;
+          }
+
+          &::before {
+            right: 100%;
+          }
+
+          &::after {
+            left: 100%;
+          }
         }
 
         .bottom {
@@ -142,8 +134,7 @@ export default defineComponent({
           top: 0px !important;
         }
 
-        & > label,
-        & > .tooltip {
+        & > label {
           @extend .shadow-box;
           @extend .absolute;
 
@@ -154,10 +145,18 @@ export default defineComponent({
           padding: $fib-5 * 1px $fib-6 * 1px;
         }
 
+        & > .tooltip {
+          @extend .shadow-box;
+          @extend .absolute;
+        }
+
         &.active {
-          background: var(--color-bg-highlight);
-          & > i {
-            color: var(--color-white);
+          &::before {
+            content: "•";
+            color: var(--color-text);
+            position: absolute;
+            font-size: xx-large;
+            transform: translateX($fib-5 * -1px);
           }
         }
 
@@ -177,15 +176,10 @@ export default defineComponent({
       }
 
       & > *:not(:hover),
-      *.no-tooltip {
-        label,
-        .tooltip {
+      & > *.no-tooltip {
+        & > label,
+        & > .tooltip {
           visibility: hidden;
-
-          &.delayed {
-            transition-delay: $fib-5 * 0.01s;
-            transition-property: visibility;
-          }
         }
       }
 

@@ -1,6 +1,23 @@
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
+
+const hideable = ref(false);
+const focus = ref([false, false, false, false, false]);
+
+const onIconClick = (index: number) => {
+  focus.value = [false, false, false, false, false];
+  focus.value[index] = true;
+};
+
+onMounted(() => {
+  setTimeout(() => {
+    hideable.value = true;
+  }, 3000);
+});
+</script>
+
 <template>
   <dock-menu :hideable="hideable">
-    <switch-button color="var(--color-accent)"></switch-button>
     <button class="no-hover no-tooltip">
       <img
         class="logo"
@@ -31,7 +48,7 @@
     </button>
     <div class="item flex">
       <i class="bx bx-cog"></i>
-      <regular-menu class="tooltip bottom delayed" :active="true">
+      <regular-menu class="tooltip bottom" :active="true">
         <button>option 1</button>
         <button>option 2</button>
         <button>option 3</button>
@@ -44,41 +61,9 @@
         src="https://assets.rawpixel.com/cover_png_400/Y29sbGVjdGlvbi9jb3Zlci9zY3JlZW5fc2hvdF8yMDE3LTA5LTE0X2F0XzMuMTQuMTBfcG0ucG5n.png?s=GkJuAnvHugH9-RJK6N_Y0MbIdONQw8fHcH4IS33-n_E"
         alt=""
       />
-      <div class="tooltip">
-        <span class="title">Username</span><br />
-        <small>Something interesting</small>
-      </div>
     </div>
   </dock-menu>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "DemoSidenav",
-
-  data() {
-    return {
-      hideable: false,
-      focus: [false, false, false, false, false],
-    };
-  },
-
-  methods: {
-    onIconClick(index: number) {
-      this.focus = [false, false, false, false, false];
-      this.focus[index] = true;
-    },
-  },
-
-  mounted() {
-    setTimeout(() => {
-      this.hideable = true;
-    }, 3000);
-  },
-});
-</script>
 
 <style lang="scss">
 @import "fibonacci-styles";
