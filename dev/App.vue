@@ -3,6 +3,7 @@ import { ref } from "vue";
 import DemoSidenav from "./DemoSidenav.vue";
 
 const showContextMenu = ref(false);
+const darkThemeEnabled = ref(false);
 
 const hideContextMenu = () => {
   showContextMenu.value = false;
@@ -25,7 +26,10 @@ const activateContextMenu = () => {
     rel="stylesheet"
   />
   <div id="app">
-    <div class="demo-set theme-light">
+    <div
+      class="demo-set"
+      :class="{ dark: darkThemeEnabled, light: !darkThemeEnabled }"
+    >
       <demo-sidenav></demo-sidenav>
       <div
         class="demo-subset bg-secondary"
@@ -33,7 +37,11 @@ const activateContextMenu = () => {
         @contextmenu.prevent
       >
         <context-menu :active="showContextMenu" @close="hideContextMenu">
-          <span>First section</span>
+          <span>Preferences</span>
+          <button @click="darkThemeEnabled = !darkThemeEnabled">
+            Switch theme
+          </button>
+          <span>Another section</span>
           <button>An option</button>
           <button>Another option</button>
           <span class="danger">Danger zone</span>
@@ -65,6 +73,7 @@ body {
   position: relative;
   min-height: 100vh;
   width: 100%;
+  background-color: var(--color-bg-secondary);
 }
 
 .demo-set {
@@ -83,7 +92,7 @@ body {
 
   .demo-subset {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
     height: 100%;
 
@@ -95,17 +104,5 @@ body {
       background-color: var(--color-bg-secondary) !important;
     }
   }
-}
-
-.demo-item {
-  flex: 1;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 200px;
-  padding-right: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 </style>
