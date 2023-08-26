@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, ref } from "vue";
+import { ref } from "vue";
 
 interface Props {
   hideable?: boolean;
@@ -105,6 +105,23 @@ const onMouseEnter = (event: MouseEvent) => {
           position: absolute;
           margin-left: $fib-5 * 1px;
           left: 100%;
+
+          &::before,
+          &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: $fib-6 * 1px;
+          }
+
+          &::before {
+            right: 100%;
+          }
+
+          &::after {
+            left: 100%;
+          }
         }
 
         .bottom {
@@ -134,9 +151,12 @@ const onMouseEnter = (event: MouseEvent) => {
         }
 
         &.active {
-          background: var(--color-bg-highlight);
-          & > i {
-            color: var(--color-white);
+          &::before {
+            content: "•";
+            color: var(--color-text);
+            position: absolute;
+            font-size: xx-large;
+            transform: translateX($fib-5 * -1px);
           }
         }
 
@@ -160,11 +180,6 @@ const onMouseEnter = (event: MouseEvent) => {
         & > label,
         & > .tooltip {
           visibility: hidden;
-
-          &.delayed {
-            transition-delay: $fib-6 * 0.01s;
-            transition-property: visibility;
-          }
         }
       }
 

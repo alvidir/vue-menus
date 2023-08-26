@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, defineEmits, watch, ref } from "vue";
+import { watch, ref } from "vue";
 import { useMouse } from "./mouse";
 import { ClickOutside as vClickOutside } from "vue-directives/src/main";
 
