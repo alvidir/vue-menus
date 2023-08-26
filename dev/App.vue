@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { ref, provide } from "vue";
+import { ref } from "vue";
 import DemoSidenav from "./DemoSidenav.vue";
-import Profile from "../src/profile";
-
-provide("profile", new Profile("", ""));
 
 const showContextMenu = ref(false);
+const darkThemeEnabled = ref(false);
 
 const hideContextMenu = () => {
   showContextMenu.value = false;
@@ -28,7 +26,10 @@ const activateContextMenu = () => {
     rel="stylesheet"
   />
   <div id="app">
-    <div class="demo-set">
+    <div
+      class="demo-set"
+      :class="{ dark: darkThemeEnabled, light: !darkThemeEnabled }"
+    >
       <demo-sidenav></demo-sidenav>
       <div
         class="demo-subset bg-secondary"
@@ -36,7 +37,11 @@ const activateContextMenu = () => {
         @contextmenu.prevent
       >
         <context-menu :active="showContextMenu" @close="hideContextMenu">
-          <span>First section</span>
+          <span>Preferences</span>
+          <button @click="darkThemeEnabled = !darkThemeEnabled">
+            Switch theme
+          </button>
+          <span>Another section</span>
           <button>An option</button>
           <button>Another option</button>
           <span class="danger">Danger zone</span>
@@ -69,5 +74,35 @@ body {
   min-height: 100vh;
   width: 100%;
   background-color: var(--color-bg-secondary);
+}
+
+.demo-set {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+
+  &.light {
+    @extend .theme-light;
+  }
+
+  &.dark {
+    @extend .theme-dark;
+  }
+
+  .demo-subset {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+
+    &.bg-primary {
+      background-color: var(--color-bg-primary) !important;
+    }
+
+    &.bg-secondary {
+      background-color: var(--color-bg-secondary) !important;
+    }
+  }
 }
 </style>

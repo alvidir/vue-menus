@@ -9,10 +9,6 @@ const onIconClick = (index: number) => {
   focus.value[index] = true;
 };
 
-const onEvent = (name: string) => {
-  console.log(`got a ${name} event`);
-};
-
 onMounted(() => {
   setTimeout(() => {
     hideable.value = true;
@@ -52,7 +48,7 @@ onMounted(() => {
     </button>
     <div class="item flex">
       <i class="bx bx-cog"></i>
-      <regular-menu class="tooltip bottom delayed" :active="true">
+      <regular-menu class="tooltip bottom" :active="true">
         <button>option 1</button>
         <button>option 2</button>
         <button>option 3</button>
@@ -65,13 +61,6 @@ onMounted(() => {
         src="https://assets.rawpixel.com/cover_png_400/Y29sbGVjdGlvbi9jb3Zlci9zY3JlZW5fc2hvdF8yMDE3LTA5LTE0X2F0XzMuMTQuMTBfcG0ucG5n.png?s=GkJuAnvHugH9-RJK6N_Y0MbIdONQw8fHcH4IS33-n_E"
         alt=""
       />
-      <profile-menu
-        class="tooltip bottom delayed"
-        @signout="onEvent('signout')"
-        @signup="onEvent('signup')"
-        @edit="onEvent('edit')"
-      >
-      </profile-menu>
     </div>
   </dock-menu>
 </template>
